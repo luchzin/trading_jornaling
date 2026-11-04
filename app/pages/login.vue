@@ -3,13 +3,13 @@
     <div class="login-box">
       <!-- Title & Context -->
       <div class="box-header">
-        <h1 class="box-title">MT5 Trader Login</h1>
-        <p class="box-desc">Connect your MetaTrader 5 account to view and journal your trades.</p>
+        <h1 class="box-title">{{ t('loginTitle') }}</h1>
+        <p class="box-desc">{{ t('loginSubtitle') }}</p>
       </div>
 
       <!-- Quick Server Fill Chips -->
       <div class="server-chips">
-        <span class="chips-title">Quick select:</span>
+        <span class="chips-title">{{ t('quickSelect') }}</span>
         <button
           v-for="srv in quickServers"
           :key="srv"
@@ -33,25 +33,25 @@
       <!-- Form -->
       <form class="login-form" @submit.prevent="handleSubmit">
         <div class="field">
-          <label for="server">Server Name</label>
+          <label for="server">{{ t('serverLabel') }}</label>
           <input
             id="server"
             v-model="form.server"
             type="text"
-            placeholder="e.g. ICMarketsSC-Live or FTMO-Demo"
+            :placeholder="t('serverPlaceholder')"
             required
             autocomplete="off"
           />
         </div>
 
         <div class="field">
-          <label for="accountNumber">Account Number / Login ID</label>
+          <label for="accountNumber">{{ t('accountLabel') }}</label>
           <input
             id="accountNumber"
             v-model="form.accountNumber"
             type="text"
             inputmode="numeric"
-            placeholder="e.g. 5092143"
+            :placeholder="t('accountPlaceholder')"
             required
             autocomplete="username"
           />
@@ -59,33 +59,33 @@
 
         <div class="field">
           <div class="field-label-row">
-            <label for="password">Password</label>
+            <label for="password">{{ t('passwordLabel') }}</label>
             <button
               type="button"
               class="reveal-btn"
               @click="showPassword = !showPassword"
             >
-              {{ showPassword ? 'Hide' : 'Show' }}
+              {{ showPassword ? t('hide') : t('show') }}
             </button>
           </div>
           <input
             id="password"
             v-model="form.password"
             :type="showPassword ? 'text' : 'password'"
-            placeholder="Trader or investor password"
+            :placeholder="t('passwordPlaceholder')"
             required
             autocomplete="current-password"
           />
         </div>
 
         <button type="submit" class="submit-btn" :disabled="isSubmitting">
-          {{ isSubmitting ? 'Connecting...' : 'Connect to MT5' }}
+          {{ isSubmitting ? t('connectingBtn') : t('connectBtn') }}
         </button>
       </form>
 
       <div class="box-footer">
         <NuxtLink to="/" class="back-link">
-          &larr; Back to Dashboard
+          {{ t('backToDashboard') }}
         </NuxtLink>
       </div>
     </div>
@@ -94,6 +94,9 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+
+const { t } = useLocale()
+const { login } = useMt5Auth()
 
 const quickServers = [
   'MetaQuotes-Demo',
@@ -113,22 +116,20 @@ const isSubmitting = ref(false)
 const errorMessage = ref('')
 const successMessage = ref('')
 
-const { login } = useMt5Auth()
-
 const handleSubmit = async () => {
   errorMessage.value = ''
   successMessage.value = ''
 
   if (!form.server.trim()) {
-    errorMessage.value = 'Please provide your MT5 Server Name.'
+    errorMessage.value = t('errorServer')
     return
   }
   if (!form.accountNumber.trim()) {
-    errorMessage.value = 'Please enter your MT5 Account Number.'
+    errorMessage.value = t('errorAccount')
     return
   }
   if (!form.password.trim()) {
-    errorMessage.value = 'Please enter your MT5 Password.'
+    errorMessage.value = t('errorPassword')
     return
   }
 
@@ -141,14 +142,14 @@ const handleSubmit = async () => {
       password: form.password
     })
 
-    successMessage.value = 'Connected! Redirecting to /'
+    successMessage.value = t('successRedirect')
 
     // Redirect to / page
     setTimeout(async () => {
       await navigateTo('/')
     }, 400)
   } catch (err: any) {
-    errorMessage.value = err?.message || 'Connection failed. Please check credentials.'
+    errorMessage.value = err?.message || t('connectionFailed')
     isSubmitting.value = false
   }
 }

@@ -6,67 +6,67 @@
         <div class="connection-left">
           <span class="status-indicator"></span>
           <div>
-            <div class="panel-heading">Connected to {{ account.server }}</div>
-            <div class="panel-sub">Account ID: #{{ account.accountNumber }} &bull; MT5 bridge operational</div>
+            <div class="panel-heading">{{ t('connectedTo') }} {{ account.server }}</div>
+            <div class="panel-sub">{{ t('accountId') }}: #{{ account.accountNumber }} &bull; {{ t('bridgeActive') }}</div>
           </div>
         </div>
         <NuxtLink to="/login" class="btn-subtle">
-          Change Account
+          {{ t('changeAccount') }}
         </NuxtLink>
       </section>
 
       <section v-else class="panel empty-panel">
         <div>
-          <div class="panel-heading">No MT5 account connected</div>
-          <div class="panel-sub">Sign in with your server, account ID, and password to view synchronized trades.</div>
+          <div class="panel-heading">{{ t('notConnectedTitle') }}</div>
+          <div class="panel-sub">{{ t('notConnectedDesc') }}</div>
         </div>
         <NuxtLink to="/login" class="btn-primary">
-          Connect MT5
+          {{ t('openLoginBtn') }}
         </NuxtLink>
       </section>
 
       <!-- Clean Metrics Row -->
       <section class="metrics-grid">
         <div class="metric-card">
-          <span class="metric-title">Net P&L</span>
+          <span class="metric-title">{{ t('netPnl') }}</span>
           <span class="metric-value text-green">+$4,820.50</span>
-          <span class="metric-meta">+12.4% this month</span>
+          <span class="metric-meta">{{ t('monthPerformance') }}</span>
         </div>
         <div class="metric-card">
-          <span class="metric-title">Win Rate</span>
+          <span class="metric-title">{{ t('winRate') }}</span>
           <span class="metric-value">68.0%</span>
-          <span class="metric-meta">34W / 16L</span>
+          <span class="metric-meta">{{ t('winLossStats') }}</span>
         </div>
         <div class="metric-card">
-          <span class="metric-title">Profit Factor</span>
+          <span class="metric-title">{{ t('profitFactor') }}</span>
           <span class="metric-value">2.41</span>
-          <span class="metric-meta">Gross: $8.2k / $3.4k</span>
+          <span class="metric-meta">{{ t('grossStats') }}</span>
         </div>
         <div class="metric-card">
-          <span class="metric-title">Trades Recorded</span>
+          <span class="metric-title">{{ t('tradesRecorded') }}</span>
           <span class="metric-value">50</span>
-          <span class="metric-meta">Avg R:R 1:2.2</span>
+          <span class="metric-meta">{{ t('avgRr') }}</span>
         </div>
       </section>
 
       <!-- Recent Trades Journal Table -->
       <section class="panel table-panel">
         <div class="table-header">
-          <h2 class="table-title">Trade Journal</h2>
-          <span class="table-caption">Recent MT5 sync</span>
+          <h2 class="table-title">{{ t('journalHeading') }}</h2>
+          <span class="table-caption">{{ t('recentSync') }}</span>
         </div>
 
         <div class="table-wrap">
           <table class="data-table">
             <thead>
               <tr>
-                <th>Symbol</th>
-                <th>Type</th>
-                <th>Volume</th>
-                <th>Open Price</th>
-                <th>Close Price</th>
-                <th>P&L (USD)</th>
-                <th>Status</th>
+                <th>{{ t('colSymbol') }}</th>
+                <th>{{ t('colType') }}</th>
+                <th>{{ t('colVolume') }}</th>
+                <th>{{ t('colOpen') }}</th>
+                <th>{{ t('colClose') }}</th>
+                <th>{{ t('colProfit') }}</th>
+                <th>{{ t('colStatus') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -81,7 +81,7 @@
                 <td :class="['font-mono', trade.profit >= 0 ? 'text-green' : 'text-red']">
                   {{ trade.profit >= 0 ? '+' : '' }}${{ trade.profit.toFixed(2) }}
                 </td>
-                <td><span class="tag tag-neutral">Closed</span></td>
+                <td><span class="tag tag-neutral">{{ t('statusClosed') }}</span></td>
               </tr>
             </tbody>
           </table>
@@ -93,6 +93,7 @@
 
 <script setup lang="ts">
 const { account } = useMt5Auth()
+const { t } = useLocale()
 
 const sampleTrades = [
   { id: '101', symbol: 'EURUSD', type: 'BUY', volume: '1.00', openPrice: '1.08450', closePrice: '1.08920', profit: 470.00 },

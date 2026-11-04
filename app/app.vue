@@ -8,9 +8,11 @@
 
 <script setup lang="ts">
 const { initTheme } = useTheme()
+const { initLocale } = useLocale()
 
 onMounted(() => {
   initTheme()
+  initLocale()
 })
 </script>
 
@@ -74,7 +76,7 @@ body {
   padding: 0;
   background-color: var(--bg-page);
   color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Kantumruy Pro", "Battambang", "Siemreap", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   line-height: 1.5;
   transition: background-color 0.2s ease, color 0.2s ease;
 }

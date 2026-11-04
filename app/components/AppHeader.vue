@@ -16,14 +16,14 @@
           </svg>
         </div>
         <div class="brand-text">
-          <span class="brand-title">MT5 Journal</span>
+          <span class="brand-title">{{ t('brandTitle') }}</span>
         </div>
       </NuxtLink>
 
-      <!-- Right Actions: Home icon, Theme toggle, Account badge -->
+      <!-- Right Actions: Home icon, Theme toggle, Language switcher, Account status -->
       <div class="header-actions">
         <!-- Home Icon Button -->
-        <NuxtLink to="/" class="icon-btn" title="Go to Home (/)" aria-label="Home">
+        <NuxtLink to="/" class="icon-btn" :title="t('homeTitle')" :aria-label="t('homeTitle')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="action-icon">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
             <polyline points="9 22 9 12 15 12 15 22" />
@@ -31,7 +31,13 @@
         </NuxtLink>
 
         <!-- Theme Toggle Button -->
-        <button type="button" class="icon-btn" :title="theme === 'dark' ? 'Switch to Light theme' : 'Switch to Dark theme'" :aria-label="theme === 'dark' ? 'Switch to Light' : 'Switch to Dark'" @click="toggleTheme">
+        <button
+          type="button"
+          class="icon-btn"
+          :title="theme === 'dark' ? t('themeDark') : t('themeLight')"
+          :aria-label="theme === 'dark' ? t('themeDark') : t('themeLight')"
+          @click="toggleTheme"
+        >
           <!-- Sun (shown when dark) -->
           <svg v-if="theme === 'dark'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="action-icon">
             <circle cx="12" cy="12" r="5" />
@@ -50,21 +56,33 @@
           </svg>
         </button>
 
+        <!-- Language Switcher Button -->
+        <button
+          type="button"
+          class="lang-btn"
+          :title="t('langToggle')"
+          @click="toggleLocale"
+        >
+          <span :class="{ active: locale === 'km' }">ខ្មែរ</span>
+          <span class="lang-slash">/</span>
+          <span :class="{ active: locale === 'en' }">EN</span>
+        </button>
+
         <div class="divider"></div>
 
         <!-- Account Pill or Connect Link -->
         <template v-if="account?.isLoggedIn">
-          <div class="user-pill" :title="`Connected to ${account.server}`">
+          <div class="user-pill" :title="`${t('connectedTo')} ${account.server}`">
             <span class="live-dot"></span>
             <span class="user-text">{{ account.server.split('-')[0] }} #{{ account.accountNumber }}</span>
           </div>
           <button class="text-btn" @click="handleLogout">
-            Disconnect
+            {{ t('disconnect') }}
           </button>
         </template>
         <template v-else>
           <NuxtLink to="/login" class="login-link">
-            Connect MT5
+            {{ t('connectMt5') }}
           </NuxtLink>
         </template>
       </div>
@@ -75,6 +93,7 @@
 <script setup lang="ts">
 const { account, logout } = useMt5Auth()
 const { theme, toggleTheme } = useTheme()
+const { locale, toggleLocale, t } = useLocale()
 
 const handleLogout = async () => {
   logout()
@@ -164,6 +183,37 @@ const handleLogout = async () => {
   height: 17px;
 }
 
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  height: 34px;
+  padding: 0 0.55rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.lang-btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.lang-btn span.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.lang-slash {
+  opacity: 0.4;
+  font-size: 0.7rem;
+}
+
 .divider {
   width: 1px;
   height: 18px;
@@ -221,4 +271,3 @@ const handleLogout = async () => {
   border-color: var(--accent);
 }
 </style>
-
