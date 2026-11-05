@@ -541,12 +541,12 @@
       </div>
     </section>
 
-    <!-- Recent Trades Journal Table -->
+    <!-- Recent Trades Section -->
     <section class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs dark:border-slate-800 dark:bg-slate-900">
       <div class="flex items-center justify-between border-b border-slate-200 px-5 py-3.5 dark:border-slate-800">
         <div>
           <h2 class="text-sm font-semibold text-slate-900 dark:text-slate-100">
-            {{ t('journalHeading') }}
+            {{ t('recentTrades') }}
           </h2>
           <span class="text-xs text-slate-500 dark:text-slate-400">
             {{ t('recentSync') }}
