@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Kantumruy Pro", "Battambang", "Siemreap", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  }
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Kantumruy Pro", "Battambang", "Siemreap", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  }
+}

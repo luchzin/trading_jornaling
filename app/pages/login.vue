@@ -1,21 +1,27 @@
 <template>
-  <div class="login-page">
-    <div class="login-box">
+  <div class="flex min-h-[calc(100vh-53px)] items-center justify-center p-4 sm:p-6">
+    <div class="w-full max-w-md rounded-xl border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900">
       <!-- Title & Context -->
-      <div class="box-header">
-        <h1 class="box-title">{{ t('loginTitle') }}</h1>
-        <p class="box-desc">{{ t('loginSubtitle') }}</p>
+      <div>
+        <h1 class="text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+          {{ t('loginTitle') }}
+        </h1>
+        <p class="mt-1 text-xs text-slate-500 sm:text-sm dark:text-slate-400">
+          {{ t('loginSubtitle') }}
+        </p>
       </div>
 
       <!-- Quick Server Fill Chips -->
-      <div class="server-chips">
-        <span class="chips-title">{{ t('quickSelect') }}</span>
+      <div class="mt-4 flex flex-wrap items-center gap-1.5 rounded-lg border border-slate-200/80 bg-slate-50 p-2 dark:border-slate-800 dark:bg-slate-950">
+        <span class="text-xs text-slate-400 dark:text-slate-500 mr-0.5">{{ t('quickSelect') }}</span>
         <button
           v-for="srv in quickServers"
           :key="srv"
           type="button"
-          class="chip"
-          :class="{ selected: form.server === srv }"
+          class="rounded border px-2 py-0.5 text-xs transition"
+          :class="form.server === srv
+            ? 'border-emerald-600 bg-emerald-50 font-medium text-emerald-700 dark:border-emerald-500 dark:bg-emerald-950/40 dark:text-emerald-400'
+            : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-slate-700'"
           @click="form.server = srv"
         >
           {{ srv }}
@@ -23,17 +29,19 @@
       </div>
 
       <!-- Messages -->
-      <div v-if="errorMessage" class="notice notice-error">
+      <div v-if="errorMessage" class="mt-3.5 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700 dark:border-rose-900/50 dark:bg-rose-950/40 dark:text-rose-400">
         {{ errorMessage }}
       </div>
-      <div v-if="successMessage" class="notice notice-success">
+      <div v-if="successMessage" class="mt-3.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-700 dark:border-emerald-900/50 dark:bg-emerald-950/40 dark:text-emerald-400">
         {{ successMessage }}
       </div>
 
       <!-- Form -->
-      <form class="login-form" @submit.prevent="handleSubmit">
-        <div class="field">
-          <label for="server">{{ t('serverLabel') }}</label>
+      <form class="mt-4 flex flex-col gap-3.5" @submit.prevent="handleSubmit">
+        <div class="flex flex-col gap-1.5">
+          <label for="server" class="text-xs font-medium text-slate-700 dark:text-slate-300">
+            {{ t('serverLabel') }}
+          </label>
           <input
             id="server"
             v-model="form.server"
@@ -41,11 +49,14 @@
             :placeholder="t('serverPlaceholder')"
             required
             autocomplete="off"
+            class="w-full rounded-lg border border-slate-200 bg-slate-50/50 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-1 focus:ring-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600 dark:focus:border-emerald-500 dark:focus:bg-slate-950"
           />
         </div>
 
-        <div class="field">
-          <label for="accountNumber">{{ t('accountLabel') }}</label>
+        <div class="flex flex-col gap-1.5">
+          <label for="accountNumber" class="text-xs font-medium text-slate-700 dark:text-slate-300">
+            {{ t('accountLabel') }}
+          </label>
           <input
             id="accountNumber"
             v-model="form.accountNumber"
@@ -54,15 +65,18 @@
             :placeholder="t('accountPlaceholder')"
             required
             autocomplete="username"
+            class="w-full rounded-lg border border-slate-200 bg-slate-50/50 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-1 focus:ring-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600 dark:focus:border-emerald-500 dark:focus:bg-slate-950"
           />
         </div>
 
-        <div class="field">
-          <div class="field-label-row">
-            <label for="password">{{ t('passwordLabel') }}</label>
+        <div class="flex flex-col gap-1.5">
+          <div class="flex items-center justify-between">
+            <label for="password" class="text-xs font-medium text-slate-700 dark:text-slate-300">
+              {{ t('passwordLabel') }}
+            </label>
             <button
               type="button"
-              class="reveal-btn"
+              class="text-xs text-slate-400 transition hover:text-slate-700 dark:hover:text-slate-200"
               @click="showPassword = !showPassword"
             >
               {{ showPassword ? t('hide') : t('show') }}
@@ -75,16 +89,21 @@
             :placeholder="t('passwordPlaceholder')"
             required
             autocomplete="current-password"
+            class="w-full rounded-lg border border-slate-200 bg-slate-50/50 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-1 focus:ring-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600 dark:focus:border-emerald-500 dark:focus:bg-slate-950"
           />
         </div>
 
-        <button type="submit" class="submit-btn" :disabled="isSubmitting">
+        <button
+          type="submit"
+          :disabled="isSubmitting"
+          class="mt-2 w-full rounded-lg bg-emerald-600 py-2.5 text-sm font-medium text-white shadow-xs transition hover:bg-emerald-500 focus:ring-2 focus:ring-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-400"
+        >
           {{ isSubmitting ? t('connectingBtn') : t('connectBtn') }}
         </button>
       </form>
 
-      <div class="box-footer">
-        <NuxtLink to="/" class="back-link">
+      <div class="mt-5 border-t border-slate-200 pt-4 text-center dark:border-slate-800">
+        <NuxtLink to="/" class="text-xs text-slate-500 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100">
           {{ t('backToDashboard') }}
         </NuxtLink>
       </div>
@@ -154,193 +173,3 @@ const handleSubmit = async () => {
   }
 }
 </script>
-
-<style scoped>
-.login-page {
-  min-height: calc(100vh - 55px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-}
-
-.login-box {
-  width: 100%;
-  max-width: 420px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1.75rem;
-}
-
-.box-header {
-  margin-bottom: 1.25rem;
-}
-
-.box-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.35rem;
-}
-
-.box-desc {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-
-.server-chips {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.35rem;
-  margin-bottom: 1.25rem;
-  padding: 0.5rem 0.65rem;
-  background: var(--bg-input);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-}
-
-.chips-title {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-right: 0.2rem;
-}
-
-.chip {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  font-size: 0.75rem;
-  padding: 0.2rem 0.45rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.chip:hover {
-  color: var(--text-primary);
-  border-color: var(--border-hover);
-}
-
-.chip.selected {
-  border-color: var(--accent);
-  color: var(--accent);
-  font-weight: 500;
-}
-
-.notice {
-  padding: 0.6rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.825rem;
-  margin-bottom: 1rem;
-}
-
-.notice-error {
-  background: var(--danger-bg);
-  border: 1px solid var(--danger-border);
-  color: var(--danger);
-}
-
-.notice-success {
-  background: var(--success-bg);
-  border: 1px solid var(--success-border);
-  color: var(--accent);
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.field label {
-  font-size: 0.825rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.field-label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.reveal-btn {
-  background: none;
-  border: none;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  cursor: pointer;
-  padding: 0;
-}
-
-.reveal-btn:hover {
-  color: var(--text-primary);
-}
-
-input {
-  background: var(--bg-input);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  border-radius: 6px;
-  padding: 0.55rem 0.75rem;
-  font-size: 0.875rem;
-  outline: none;
-  transition: border-color 0.15s;
-}
-
-input:focus {
-  border-color: var(--accent);
-}
-
-input::placeholder {
-  color: var(--text-muted);
-}
-
-.submit-btn {
-  margin-top: 0.5rem;
-  background: var(--accent);
-  color: var(--accent-text);
-  border: 1px solid transparent;
-  border-radius: 6px;
-  padding: 0.6rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.submit-btn:hover:not(:disabled) {
-  background: var(--accent-hover);
-}
-
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.box-footer {
-  margin-top: 1.25rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
-  text-align: center;
-}
-
-.back-link {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  text-decoration: none;
-}
-
-.back-link:hover {
-  color: var(--text-primary);
-}
-</style>

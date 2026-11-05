@@ -5,6 +5,8 @@ export const translations = {
     // Brand & Navigation
     brandTitle: 'កំណត់ហេតុ MT5',
     homeTitle: 'ទៅកាន់ទំព័រដើម (Home)',
+    navHome: 'ទំព័រដើម',
+    navLogs: 'កំណត់ត្រាជួញដូរ',
     themeDark: 'ប្តូរទៅទម្រង់ពន្លឺ (Light)',
     themeLight: 'ប្តូរទៅទម្រង់ងងឹត (Dark)',
     langToggle: 'ប្តូរភាសា (Language)',
@@ -57,12 +59,67 @@ export const translations = {
     colClose: 'តម្លៃបិទ',
     colProfit: 'ចំណេញ/ខាត (USD)',
     colStatus: 'ស្ថានភាព',
-    statusClosed: 'បានបិទ'
+    statusClosed: 'បានបិទ',
+    viewAllLogs: 'មើលកំណត់ត្រាជួញដូរទាំងអស់ →',
+
+    // Summary Infographics
+    performanceAnalytics: 'ការវិភាគទិន្នន័យសង្ខេប',
+    equityGrowth: 'ខ្សែកោងកំណើនទុន (Equity Growth Curve)',
+    winLossDistribution: 'សមាមាត្រ ឈ្នះ / ចាញ់',
+    winsLabel: 'ឈ្នះ (Wins)',
+    lossesLabel: 'ចាញ់ (Losses)',
+    longWinRate: 'ទិញ (Buy / Long)',
+    shortWinRate: 'លក់ (Sell / Short)',
+    grossProfit: 'ចំណេញសរុប',
+    grossLoss: 'ខាតសរុប',
+    dailyPnlTitle: 'ទិន្នផលប្រចាំសប្តាហ៍',
+    baseline: 'ដើមទុន: $10,000',
+    currentEquity: 'ទុនបច្ចុប្បន្ន: $14,820.50',
+
+    // Scale Up Compound Strategy
+    scaleUpTitle: 'យុទ្ធសាស្ត្របង្កើនទុន Scale Up (XAUUSD)',
+    scaleUpSub: 'ផែនការ ៤ ដំណាក់កាលឆ្ពោះទៅ $10,000 Balance និង $15,000 សរុបដកប្រាក់រង្វាន់ Trader',
+    milestoneLabel: 'សមិទ្ធផលទុន',
+    rewardLabel: 'ដកប្រាក់រង្វាន់ (Withdrawal Reward)',
+    targetProgress: 'វឌ្ឍនភាព',
+    statusCompleted: 'សម្រេចបាន 100%',
+    statusInProgress: 'កំពុងដំណើរការ',
+    statusLocked: 'ចាក់សោ',
+    riskPerTrade: 'ហានិភ័យ/Trade',
+    targetBalance: 'ទុនគោលដៅ',
+    targetGrowth: 'កំណើនសរុប',
+    pair: 'គូរូបិយប័ណ្ណ',
+    accountSize: 'ទំហំគណនី',
+    riskRewardRatio: 'សមាមាត្រ R:R',
+    lotSize: 'ទំហំ Lot',
+    goa: 'កំណើន (GOA)',
+    balance: 'សមតុល្យទុន',
+    withdrawReward: 'ដកប្រាក់រង្វាន់ (Withdrawal)',
+    startingBalance: 'ដើមទុនចាប់ផ្តើម',
+    totalProfit: 'ប្រាក់ចំណេញសរុប',
+    totalWithdrawals: 'ដកប្រាក់រង្វាន់សរុប',
+    stageOverview: 'ទិដ្ឋភាពទូទៅនៃផែនការដកប្រាក់ (Withdrawal Roadmap)',
+
+    // Trade Logs Page
+    allLogsTitle: 'កំណត់ត្រាជួញដូរទាំងអស់ (Trading Logs)',
+    allLogsSub: 'ប្រវត្តិប្រតិបត្តិការជួញដូរលម្អិតទាំងអស់ដែលបានធ្វើសមកាលកម្មជាមួយ MT5',
+    filterAll: 'ទាំងអស់',
+    filterWins: 'ឈ្នះតែប៉ុណ្ណោះ',
+    filterLosses: 'ចាញ់តែប៉ុណ្ណោះ',
+    filterBuy: 'Buy តែប៉ុណ្ណោះ',
+    filterSell: 'Sell តែប៉ុណ្ណោះ',
+    searchPlaceholder: 'ស្វែងរក Symbol, Ticket...',
+    colTicket: 'Ticket',
+    colOpenTime: 'កាលបរិច្ឆេទបើក',
+    colCloseTime: 'កាលបរិច្ឆេទទទួលផល',
+    totalTradesFound: 'ចំនួនប្រតិបត្តិការសរុប'
   },
   en: {
     // Brand & Navigation
     brandTitle: 'MT5 Journal',
     homeTitle: 'Go to Home (/)',
+    navHome: 'Home',
+    navLogs: 'Trade Logs',
     themeDark: 'Switch to Light theme',
     themeLight: 'Switch to Dark theme',
     langToggle: 'Switch Language',
@@ -115,7 +172,60 @@ export const translations = {
     colClose: 'Close Price',
     colProfit: 'P&L (USD)',
     colStatus: 'Status',
-    statusClosed: 'Closed'
+    statusClosed: 'Closed',
+    viewAllLogs: 'View All Trade Logs →',
+
+    // Summary Infographics
+    performanceAnalytics: 'Performance Analytics',
+    equityGrowth: 'Equity Growth Curve',
+    winLossDistribution: 'Win / Loss Distribution',
+    winsLabel: 'Wins',
+    lossesLabel: 'Losses',
+    longWinRate: 'Buy (Long)',
+    shortWinRate: 'Sell (Short)',
+    grossProfit: 'Gross Profit',
+    grossLoss: 'Gross Loss',
+    dailyPnlTitle: 'Weekly P&L Breakdown',
+    baseline: 'Initial: $10,000',
+    currentEquity: 'Current: $14,820.50',
+
+    // Scale Up Compound Strategy
+    scaleUpTitle: 'Scale Up Compound Strategy (XAUUSD)',
+    scaleUpSub: '4-Stage progressive scale up roadmap to $10,000 balance and $15,000 total withdrawal rewards',
+    milestoneLabel: 'Capital Milestone',
+    rewardLabel: 'Withdrawal Reward',
+    targetProgress: 'Progress',
+    statusCompleted: 'Completed 100%',
+    statusInProgress: 'In Progress',
+    statusLocked: 'Locked',
+    riskPerTrade: 'Risk / Trade',
+    targetBalance: 'Target Balance',
+    targetGrowth: 'Overall Gain',
+    pair: 'Pair',
+    accountSize: 'Account Size',
+    riskRewardRatio: 'Risk Reward',
+    lotSize: 'Lot Size',
+    goa: 'Growth (GOA)',
+    balance: 'Account Balance',
+    withdrawReward: 'Withdrawal Reward',
+    startingBalance: 'Starting Balance',
+    totalProfit: 'Total Profit Target',
+    totalWithdrawals: 'Total Withdrawals',
+    stageOverview: 'Withdrawal Roadmap Overview',
+
+    // Trade Logs Page
+    allLogsTitle: 'All Trading Logs',
+    allLogsSub: 'Comprehensive execution history synchronized from your MetaTrader 5 account',
+    filterAll: 'All',
+    filterWins: 'Wins Only',
+    filterLosses: 'Losses Only',
+    filterBuy: 'Buy Only',
+    filterSell: 'Sell Only',
+    searchPlaceholder: 'Search symbol, ticket...',
+    colTicket: 'Ticket',
+    colOpenTime: 'Open Time',
+    colCloseTime: 'Close Time',
+    totalTradesFound: 'Trades Recorded'
   }
 }
 
@@ -167,4 +277,3 @@ export const useLocale = () => {
     initLocale
   }
 }
-
